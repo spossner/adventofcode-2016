@@ -20,6 +20,7 @@ class Solution:
             instr = ops[ptr]
             if ptr == 4: # quick fix multiplication in line 0x04:
                 registers['a'] = registers['b'] * registers['d']
+                print(f"inject mul {registers['b']} * {registers['d']} = {registers['a']}")
                 registers['c'] = 0
                 registers['d'] = 0
                 ptr = 10 # continue at line 10
@@ -67,12 +68,12 @@ class Solution:
 
                 if p >= 0 and p < len(ops):
                     o = ops[p]
-                    print(f"toggle {o} to ", end='')
+                    # print(f"toggle {o} to ", end='')
                     if len(o) == 2:
                         o[0] = 'dec' if o[0] == 'inc' else 'inc'
                     elif len(o) == 3:
                         o[0] = 'cpy' if o[0] == 'jnz' else 'jnz'
-                    print(o)
+                    # print(o)
             else:
                 raise SyntaxError(f'unexpected command {instr} at line {ptr}')
             ptr += 1
